@@ -9,7 +9,7 @@ export interface Hero {
   styleUrls: ['./home-page.component.scss']
 })
  export class HomePageComponent implements OnInit {
-
+  title = 'Air Quality Data';
   constructor() { }
 
   ngOnInit(): void {
