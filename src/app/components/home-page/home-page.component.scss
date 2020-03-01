@@ -20,5 +20,10 @@
 }
 
 .flags {
-  padding: 0px;
+  display: flex;
+  justify-content: center;
+  div {
+    width: 60%;
+    height: 30px;
+  }
 }
