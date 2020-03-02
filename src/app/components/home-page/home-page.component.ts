@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import axios from 'axios';
+import {AUDIENCE, API_BASE_URL, AUTH_URL, CLIENT_ID, CLIENT_SECRET, GRANT_TYPE} from '../../../configs/config';
 
 export interface City {
   id: number;
@@ -12,17 +13,39 @@ export interface City {
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   airData = [];
+  
   constructor() {
-    axios.get('http://localhost:4000/')
+    axios({
+      url: AUTH_URL,
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: {
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        audience: AUDIENCE,
+        grant_type: GRANT_TYPE
+      }
+    })
       .then(response => {
-        // handle success
-        console.log(response.data);
-        this.airData = response.data;
-        this.ngOnInit();
+        axios({
+          url: '/',
+          method: 'get',
+          baseURL: API_BASE_URL,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${response.data.access_token}`
+          },
+        })
+          .then(res => {
+            this.airData = res.data;
+            this.ngOnInit();
+          });
       })
       .catch(error => {
-        // handle error
-        console.log(error);
+        console.log('###### Error: ', error);
       });
   }
 
