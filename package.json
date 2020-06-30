@@ -22,7 +22,7 @@
     "@angular/router": "~9.0.2",
     "auth0-js": "^9.12.2",
     "axios": "^0.19.2",
-    "express-jwt": "^5.3.1",
+    "express-jwt": "^6.0.0",
     "jwks-rsa": "^1.7.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
